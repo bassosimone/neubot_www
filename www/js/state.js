@@ -170,7 +170,7 @@ var state = (function() {
         //
         function get_state() {
             var params = {
-                url: "http://127.0.0.1:9774/api/state?t=" + curtime,  // XXX
+                url: utils.makeURL("/api/state?t=" + curtime),
                 error: get_state_error,
                 success: get_state_success,
                 dataType: "json"

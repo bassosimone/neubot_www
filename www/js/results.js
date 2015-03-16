@@ -551,7 +551,7 @@ var results = (function () {
             data.until = Math.ceil(until / 1000);
         }
         jQuery.ajax({
-            url: '/api/data',
+            url: utils.makeURL('/api/data'),
             data: data,
             success: function (data) {
                 jQuery("#charts").html("");
@@ -638,7 +638,7 @@ var results = (function () {
 
     function call_api_results(data) {
         jQuery.ajax({
-            url: "/api/results",
+            url: utils.makeURL("/api/results"),
             data: data,
             dataType: 'json',
             success: handle_api_results

@@ -1,27 +1,16 @@
-/* neubot/www/js/index.js */
 /*-
- * Copyright (c) 2010 Antonio Servetti <antonio.servetti@polito.it>,
- *  Politecnico di Torino
- *
- * Copyright (c) 2010 Simone Basso <bassosimone@gmail.com>,
- *  NEXA Center for Internet & Society at Politecnico di Torino
- *
  * This file is part of Neubot <http://www.neubot.org/>.
  *
- * Neubot is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Neubot is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Neubot.  If not, see <http://www.gnu.org/licenses/>.
+ * Neubot is free software. See AUTHORS and LICENSE for more
+ * information on the copying conditions.
  */
 
+//
+// The "main" of Neubot web interface.
+//
+
+// TODO: move this function inside .ready() to
+// avoid polluting the function space
 function process_state(data) {
 
     var now = utils.getNow();
@@ -58,78 +47,71 @@ function process_state(data) {
     if (data.events.test_name) {
         jQuery("#testName").text(data.events.test_name);
     }
-
 }
-
-function index_init() {
-    utils.setActiveTab("index");
-
-    jQuery.jqplot.config.enablePlugins = true;
-
-    tracker = state.tracker(process_state);
-    tracker.start();
-};
 
 jQuery(document).ready(function() {
 
+    //
+    // This translates the parts of the DOM that are loaded
+    // at the moment in which it is invoked.
+    //
+    // FIXME It does not translate inside the "tabs".
+    //
+    i18n.translate(function () {
 
-	i18n.translate(function () {
-        
-/*        jQuery.jqplot.config.enablePlugins = true;
-        tracker = state.tracker(function(){});
-        tracker.start();
-*/                
-        $('#content').load('status.html', function(){
+        //
+        // By default load the status.html page
+        //
+        $('#content').load('status.html', function () {
+
             $(".i18n").css("visibility", "visible");
-            utils.setActiveTab("index");
-        });
+            utils.setActiveTab("index");  // XXX non consistent naming
 
-        $('#resultsbutton').click(function(){
-            $('#content').load('results.html', function(){
-                utils.setActiveTab("results");
-                $(".i18n").css("visibility", "visible");					
+            //
+            // Arrange things so that when we click on a button we
+            // change "tab" in the UX:
+            //
+            $('#statusbutton').click(function () {
+                $('#content').load('status.html', function () {
+                    $(".i18n").css("visibility", "visible");
+                    utils.setActiveTab("index");  // XXX non consistent naming
+                });
             });
-        });
- 
-        $('#logbutton').click(function(){
-            $('#content').load('log.html', function(){
-                utils.setActiveTab("log");
-                $(".i18n").css("visibility", "visible");					
+            $('#resultsbutton').click(function () {
+                $('#content').load('results.html', function () {
+                    $(".i18n").css("visibility", "visible");
+                    utils.setActiveTab("results");
+                });
             });
-        });
-                    
-        $('#privacybutton').click(function(){
-            $('#content').load('privacy.html', function(){
-                utils.setActiveTab("privacy");
-                $(".i18n").css("visibility", "visible");					
+            $('#logbutton').click(function () {
+                $('#content').load('log.html', function () {
+                    $(".i18n").css("visibility", "visible");
+                    utils.setActiveTab("log");
+                });
             });
-        });
+            $('#privacybutton').click(function () {
+                $('#content').load('privacy.html', function () {
+                    $(".i18n").css("visibility", "visible");
+                    utils.setActiveTab("privacy");
+                });
+            });
+            $('#settingsbutton').click(function () {
+                $('#content').load('settings.html', function () {
+                    $(".i18n").css("visibility", "visible");
+                    utils.setActiveTab("settings");
+                });
+            });
 
-        $('#resultsbutton').click(function(){
-            $('#settings').load('settings.html', function(){
-                utils.setActiveTab("settings");
-                $(".i18n").css("visibility", "visible");					
-            });
-        });
+            // We need this to use jqplot.
+            jQuery.jqplot.config.enablePlugins = true;
 
-        $('#settingsbutton').click(function(){
-            $('#content').load('settings.html', function(){
-                utils.setActiveTab("settings");
-                $(".i18n").css("visibility", "visible");					
-            });
-        });
+            //
+            // This starts a function that runs periodically to
+            // track the state of the Neubot process.
+            //
+            tracker = state.tracker(process_state);
+            tracker.start();
 
-        $('#statusbutton').click(function(){
-            $('#content').load('status.html', function(){
-                utils.setActiveTab("index");
-                $(".i18n").css("visibility", "visible");					
-            });
         });
-
     });
 });
-
-
-
-
-        

@@ -98,12 +98,12 @@ function settings_init() {
     utils.setActiveTab("settings");
 
     jQuery.ajax({
-        url: 'api/config?labels=1',
+        url: utils.makeURL('api/config?labels=1'),
         dataType: 'json',
         success: function(data) {
             labels = data;
             jQuery.ajax({
-                url: 'api/config',
+                url: utils.makeURL('api/config'),
                 dataType: 'json',
                 success: function(data) {
                     filtered = Array();

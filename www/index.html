@@ -1,14 +1,25 @@
         
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang = "en">
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.qtip.min.js"></script>
+
+        <script type="text/javascript" src="js/i18n.js"></script>
+        <script type="text/javascript" src="js/state.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/contrib.js"></script>
+        <script type="text/javascript" src="js/utils.js"></script>
+
+        <script type="text/javascript" src="js/log.js"></script>
+        <script type='text/javascript' src='js/privacy.js'></script>
+        <script type="text/javascript" src="js/results.js"></script>
+        <script type="text/javascript" src="js/settings.js"></script>
+        <script type="text/javascript" src="js/update.js"></script>
 
         <script type="text/javascript" src="js/excanvas.min.js"></script>
         <script type="text/javascript" src="js/jquery.jqplot.min.js"></script>
@@ -20,18 +31,6 @@
         <script type="text/javascript" src="js/jqplot.categoryAxisRenderer.min.js"></script>
         <script type="text/javascript" src="js/jqplot.dateAxisRenderer.min.js"></script>
         <script type="text/javascript" src="js/jqplot.logAxisRenderer.min.js"></script>
-
-        <script type="text/javascript" src="js/i18n.js"></script>
-        <script type="text/javascript" src="js/contrib.js"></script>
-        <script type="text/javascript" src="js/state.js"></script>
-        <script type="text/javascript" src="js/utils.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-
-        <script type="text/javascript" src="js/log.js"></script>
-        <script type='text/javascript' src='js/privacy.js'></script>
-        <script type="text/javascript" src="js/results.js"></script>
-        <script type="text/javascript" src="js/settings.js"></script>
-        <script type="text/javascript" src="js/update.js"></script>
 
         <title>Neubot 0.4.16.9 | Web interface</title>
 
@@ -60,20 +59,20 @@
                     <a href="http://nexa.polito.it/">Nexa</a>
                 </h2>
                 <ul class="k2menu" id='menu_tab_list'>
-                    <li id='tab_index'>
-                        <a id="statusbutton" title="The status of the daemon" class="i18n i18n_status">Status</a>
+                    <li id='tab_status'>
+                        <a id="statuslink" title="The status of the daemon" class="i18n i18n_status sect">Status</a>
                     </li>
                     <li id='tab_results'>
-                        <a id="resultsbutton" title="Your recent results" class="i18n i18n_results">Results</a>
+                        <a id="resultslink" title="Your recent results" class="i18n i18n_results sect">Results</a>
                     </li>
                     <li id='tab_log'>
-                        <a id="logbutton" title="Log" class="i18n i18n_log">Log</a>
+                        <a id="loglink" title="Log" class="i18n i18n_log sect">Log</a>
                     </li>
                     <li id='tab_privacy'>
-                        <a id="privacybutton" title="Privacy" class="i18n i18n_privacy">Privacy</a>
+                        <a id="privacylink" title="Privacy" class="i18n i18n_privacy sect">Privacy</a>
                     </li>
                     <li id='tab_settings'>
-                        <a id="settingsbutton" title="Settings" class="i18n i18n_setting">Settings</a>
+                        <a id="settingslink" title="Settings" class="i18n i18n_setting sect">Settings</a>
                     </li>
                     <li id='tab_site'>
                         <a href="http://www.neubot.org/" title="Go to Neubot web site" class='i18n i18n_website'>Neubot web site</a>
@@ -202,5 +201,6 @@
 
     </body>
 </html>
+
 
 

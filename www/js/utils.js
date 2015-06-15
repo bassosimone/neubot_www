@@ -215,5 +215,15 @@ var utils = (function() {
         });
     }
 
+    self.makeURL = function (path) { 
+        
+        if (path.indexOf("/") != 0) {
+            path = "/" + path;
+
+        }
+ 
+        return "http://127.0.0.1:9774" + path;
+    }
+
     return self;
 })();

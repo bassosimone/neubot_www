@@ -26,7 +26,7 @@ function process_state(data) {
         if (value && value > now) {
             jQuery("#next_rendezvous").text(utils.formatMinutes(value - now));
         }
-    }a
+    }
 
     if (data.events.since) {
         value = utils.getTimeFromSeconds(data.events.since, true);
@@ -50,68 +50,37 @@ function process_state(data) {
 }
 
 jQuery(document).ready(function() {
+    var section, link;
+
+    // We need this to use jqplot.
+    jQuery.jqplot.config.enablePlugins = true;
 
     //
-    // This translates the parts of the DOM that are loaded
-    // at the moment in which it is invoked.
+    // This starts a function that runs periodically to
+    // track the state of the Neubot process.
     //
-    // FIXME It does not translate inside the "tabs".
+    tracker = state.tracker(function(){});
+    tracker.start();
+
     //
-    i18n.translate(function () {
+    // By default load the status.html page
+    //
+    $("#content").load("status.html", function() {
+        utils.setActiveTab("status");
+        i18n.translate();
+    });
 
-        //
-        // By default load the status.html page
-        //
-        $('#content').load('status.html', function () {
-
-            $(".i18n").css("visibility", "visible");
-            utils.setActiveTab("index");  // XXX non consistent naming
-
-            //
-            // Arrange things so that when we click on a button we
-            // change "tab" in the UX:
-            //
-            $('#statusbutton').click(function () {
-                $('#content').load('status.html', function () {
-                    $(".i18n").css("visibility", "visible");
-                    utils.setActiveTab("index");  // XXX non consistent naming
-                });
-            });
-            $('#resultsbutton').click(function () {
-                $('#content').load('results.html', function () {
-                    $(".i18n").css("visibility", "visible");
-                    utils.setActiveTab("results");
-                });
-            });
-            $('#logbutton').click(function () {
-                $('#content').load('log.html', function () {
-                    $(".i18n").css("visibility", "visible");
-                    utils.setActiveTab("log");
-                });
-            });
-            $('#privacybutton').click(function () {
-                $('#content').load('privacy.html', function () {
-                    $(".i18n").css("visibility", "visible");
-                    utils.setActiveTab("privacy");
-                });
-            });
-            $('#settingsbutton').click(function () {
-                $('#content').load('settings.html', function () {
-                    $(".i18n").css("visibility", "visible");
-                    utils.setActiveTab("settings");
-                });
-            });
-
-            // We need this to use jqplot.
-            jQuery.jqplot.config.enablePlugins = true;
-
-            //
-            // This starts a function that runs periodically to
-            // track the state of the Neubot process.
-            //
-            tracker = state.tracker(process_state);
-            tracker.start();
-
+    //
+    // Arrange things so that when we click on a button we
+    // change "tab" in the UX:
+    //
+    $(".sect").click(function () {
+        section = $(this).attr("id");
+        section = section.substring(0, section.indexOf("link"));
+        link = section + ".html";
+        $("#content").load(link, function () {
+            utils.setActiveTab(section);
+            i18n.translate();
         });
     });
-});
+});        

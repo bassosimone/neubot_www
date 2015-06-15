@@ -23,7 +23,7 @@ function log_init() {
     utils.setActiveTab("log");
 
     jQuery.ajax({
-        url: 'api/log',
+        url: utils.makeURL('api/log'),
         dataType: 'json',
         success: function(data) {
             var html = "";
